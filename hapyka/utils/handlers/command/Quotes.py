@@ -3,10 +3,10 @@ import datetime
 import telegram
 
 from hapyka.database.models.QuoteModel import QuoteModel
-from hapyka.dictionaries.generic import WHERE_IS_THE_MESSAGE, QUOTED, QUOTES_TMPL, NO_QUOTES, NO_QUOTES_SELF
+from hapyka.dictionaries.generic import  QUOTES_TMPL, NO_QUOTES, NO_QUOTES_SELF
 from hapyka.database.db import get_transaction
 from hapyka.utils.handlers.command.CommandHanlder import CommandHandler
-from hapyka.utils.tg_utils import reply_text, get_sender_by_message
+from hapyka.utils.tg_utils import reply_text
 
 enabled = True
 
@@ -27,9 +27,11 @@ class Quotes(CommandHandler):
         with session_transaction:
             quotes = []
             if self_quotes:
-                user_quotes = session.query(QuoteModel).filter_by(written_by=update.message.from_user.id).all()
+                user_quotes = session.query(QuoteModel).filter_by(
+                    written_by=update.message.from_user.id).order_by(QuoteModel.when_written.asc()).all()
             else:
-                user_quotes = session.query(QuoteModel).filter_by(written_by=update.message.reply_to_message.from_user.id).all()
+                user_quotes = session.query(QuoteModel).filter_by(
+                    written_by=update.message.reply_to_message.from_user.id).order_by(QuoteModel.when_written.asc()).all()
             for aquote in user_quotes:
                 quotes.append(str(aquote))
             if len(quotes) == 0:

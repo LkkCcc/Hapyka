@@ -5,7 +5,7 @@ from hapyka.utils.Config import Config
 
 start_time = datetime.datetime.now()
 config_container = Config()
-version = "0.0.2"
+version = "1.0.1 (release 3)"
 release = '''
 Quotes!
 Press F to pay respects to NKVD-bot (R.I.P 2017-2022)
