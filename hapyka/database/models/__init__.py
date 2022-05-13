@@ -1,0 +1,1 @@
+from hapyka.database.models import QuoteModel

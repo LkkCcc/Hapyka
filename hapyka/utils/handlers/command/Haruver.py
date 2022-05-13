@@ -8,7 +8,7 @@ enabled = True
 class Haruver(CommandHandler):
     def __init__(self):
         self.enabled = enabled
-        self.commands = ["ver", "version", "nkvdver"]
+        self.commands = ["ver", "version", "nkvdver", "haruver"]
         super().__init__()
 
     def handle_impl(self, update, context):

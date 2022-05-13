@@ -12,7 +12,8 @@ class CommandHandler(HaruHandler):
     def __handle__(self, update, context):
         message_text = update.message.text.lower()
         for command in self.commands:
-            if "/{command}".format(command=command) in message_text:
+            if message_text == "/{command}".format(command=command) or \
+                    "/{command}@".format(command=command) in message_text:
                 self.handle_impl(update, context)
                 return
 
