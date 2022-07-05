@@ -3,7 +3,7 @@ import datetime
 import telegram
 
 from hapyka.database.models.QuoteModel import QuoteModel
-from hapyka.dictionaries.generic import  QUOTES_TMPL, NO_QUOTES, NO_QUOTES_SELF
+from hapyka.dictionaries.generic import QUOTES_TMPL, NO_QUOTES, NO_QUOTES_SELF, NOTHING_INTERESTING_HERE
 from hapyka.database.db import get_transaction
 from hapyka.utils.handlers.command.CommandHanlder import CommandHandler
 from hapyka.utils.tg_utils import reply_text
@@ -19,6 +19,11 @@ class Quotes(CommandHandler):
 
     def handle_impl(self, update: telegram.Update, context):
         session, session_transaction = get_transaction()
+
+        if update.message.from_user.is_bot:
+            reply_text(update, context, NOTHING_INTERESTING_HERE)
+            return
+
         if update.message.reply_to_message is None:
             self_quotes = True
         else:

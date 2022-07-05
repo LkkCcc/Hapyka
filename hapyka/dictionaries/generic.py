@@ -17,6 +17,6 @@ QUOTES_TMPL = '''
 Цитаты:
 {}
 '''
-
+NOTHING_INTERESTING_HERE = "Не вижу ничего интересного."
 MESSAGE_PRINT_TEMPLATE = "Message: {}->{}: {}"
 INLINE_PRINT_TEMPLATE = "Inline from {}. Data: {}"
